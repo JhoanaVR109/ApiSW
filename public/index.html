@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace al archivo de estilos CSS -->
+</head>
+<body>
+
+<header>
+    <h1>Catálogo de Productos</h1>
+</header>
+
+<main>
+    <h2>Elige una categoría</h2>
+    <div id="categories-container"></div>
+    
+    <h2>Productos</h2>
+    <div id="products-container"></div>
+
+    <h2>Agregar Producto</h2>
+    <form id="product-form">
+        <input type="text" id="product-name" placeholder="Nombre del producto" required>
+        <input type="number" id="product-price" placeholder="Precio del producto" required>
+        <input type="number" id="product-category" placeholder="ID de categoría" required>
+        <textarea id="product-description" placeholder="Descripción del producto" required></textarea>
+        <button type="submit">Agregar Producto</button>
+    </form>
+</main>
+
+<script>
+// Obtener categorías y productos
+async function loadCategories() {
+    try {
+        const response = await fetch('http://localhost:3000/api/categorias');
+        const categories = await response.json();
+        const categoriesContainer = document.getElementById('categories-container');
+        
+        categories.forEach(category => {
+            const categoryButton = document.createElement('button');
+            categoryButton.classList.add('category-btn');
+            categoryButton.innerText = category.nombre;
+            categoryButton.onclick = () => loadProducts(category.idCategoria);
+            categoriesContainer.appendChild(categoryButton);
+        });
+    } catch (error) {
+        console.error('Error al cargar las categorías:', error);
+    }
+}
+
+// Cargar productos según la categoría seleccionada
+async function loadProducts(categoriaId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/productos/${categoriaId}`);
+        const products = await response.json();
+        const productsContainer = document.getElementById('products-container');
+        productsContainer.innerHTML = ''; // Limpiar productos previos
+        
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <h3>${product.nombre}</h3>
+                <p>Precio: $${product.precio}</p>
+                <p>${product.descripcion}</p>
+                <button class="product-button" onclick="deleteProduct(${product.idProducto})">Eliminar Producto</button>
+            `;
+            productsContainer.appendChild(productElement);
+        });
+    } catch (error) {
+        console.error('Error al cargar los productos:', error);
+    }
+}
+
+// Agregar un producto
+document.getElementById('product-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('product-name').value;
+    const price = document.getElementById('product-price').value;
+    const category = document.getElementById('product-category').value;
+    const description = document.getElementById('product-description').value;
+    
+    const newProduct = { nombre: name, precio: price, idCategoria: category, descripcion: description };
+    
+    try {
+        const response = await fetch('http://localhost:3000/api/productos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newProduct)
+        });
+        const product = await response.json();
+        alert('Producto agregado!');
+        loadProducts(category); // Recargar los productos de la categoría
+    } catch (error) {
+        console.error('Error al agregar producto:', error);
+    }
+});
+
+// Eliminar un producto
+async function deleteProduct(productId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/productos/${productId}`, {
+            method: 'DELETE'
+        });
+        if (response.status === 204) {
+            alert('Producto eliminado!');
+            loadProducts(); // Recargar productos
+        } else {
+            console.error('Error al eliminar producto');
+        }
+    } catch (error) {
+        console.error('Error al eliminar el producto:', error);
+    }
+}
+
+// Cargar las categorías al inicio
+loadCategories();
+</script>
+
+</body>
+</html>

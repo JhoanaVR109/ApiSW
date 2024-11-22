@@ -1,0 +1,158 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f1e1; /* Color beige claro */
+    margin: 0;
+    padding: 0;
+    color: #4e342e; /* Color marrón oscuro para el texto */
+}
+
+header {
+    background-color: #6d4c41; /* Marrón suave */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-family: 'Georgia', serif;
+    font-size: 36px;
+    margin: 0;
+}
+
+/* Contenedor principal */
+main {
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* Botones de categoría */
+.category-btn {
+    margin: 10px;
+    padding: 15px 30px;
+    background-color: #4e342e; /* Marrón oscuro */
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category-btn:hover {
+    background-color: #3e2723; /* Marrón más oscuro */
+    transform: translateY(-2px);
+}
+
+.category-btn:active {
+    transform: translateY(1px);
+}
+
+/* Productos */
+.product {
+    background-color: white;
+    border: 1px solid #d7ccc8;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+}
+
+.product h3 {
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* Botón eliminar producto */
+.product-button {
+    background-color: #d32f2f; /* Rojo suave */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-button:hover {
+    background-color: #c2185b; /* Rojo más intenso */
+    transform: translateY(-2px);
+}
+
+.product-button:active {
+    transform: translateY(1px);
+}
+
+/* Estilos de formulario */
+#product-form {
+    background-color: #fff8e1; /* Fondo crema */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+#product-form input,
+#product-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #bdbdbd;
+    transition: border-color 0.3s ease;
+}
+
+#product-form input:focus,
+#product-form textarea:focus {
+    border-color: #6d4c41; /* Marrón oscuro */
+    outline: none;
+}
+
+#product-form button {
+    padding: 15px 30px;
+    background-color: #4e342e; /* Marrón oscuro */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+#product-form button:hover {
+    background-color: #3e2723; /* Marrón más oscuro */
+    transform: translateY(-2px);
+}
+
+#product-form button:active {
+    transform: translateY(1px);
+}
+
+/* Títulos de secciones */
+h2 {
+    font-family: 'Georgia', serif;
+    font-size: 28px;
+    margin-top: 20px;
+    color: #6d4c41; /* Marrón suave */
+}
